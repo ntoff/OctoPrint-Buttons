@@ -1,0 +1,203 @@
+<h3>{{ _('Dev Settings') }}</h3>
+<p><strong>{{ _('Don\'t forget to restart OctoPrint after changing any of these.') }}</strong></p>
+<div>
+    <h4>{{ _('Virtual Printer') }}</h4>
+    <form class="form-horizontal">
+        
+        <div class="control-group">
+            <label class="control-label">{{ _('Enable Virtual Printer') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.virtualPrinter.enabled">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Ambient Temperature') }}</label>
+            <div class="controls">
+                <input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                <span class="help-inline">Temperature to report in the temperature graph when the tool is "off"</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Broken M29') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Simulate a broken response to M29</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Command Buffer') }}</label>
+            <div class="controls">
+                <input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                <span class="help-inline">How many commands to buffer</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Echo M117') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Whether M117 messages are echoed back</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Extended SD File List') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Return extended file info</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Force Checksum') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Checksums?</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Has Heated Bed') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Whether or not to simulate the existence of a heated bed</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Include Current Tool In Temps') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">No clue what this does</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Include Filename In Opened') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">or this</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Movement Speed') }}</label>
+            <div class="controls">
+                <p><input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                    <span class="help-inline">Extruder</span></p>
+                <p><input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                    <span class="help-inline">X Axis</span></p>
+                <p><input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                    <span class="help-inline">Y Axis</span></p>
+                <p><input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                    <span class="help-inline">Z Axis</span></p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Number Of Extruders') }}</label>
+            <div class="controls">
+                <input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                <span class="help-inline">How many tools should show up in the temperature graph?</span>
+                <span class="help-inline"></span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Ok After Resend') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">something something consult the docs</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Ok With Line Number') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">I assume it sends some ok somewhere</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Repetier Style Resends') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Repetier vs Marlin, the ultimate showdown of ultimate destiny</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Repetier Style Target Temperature') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Sends Repetier firmware's oddball target temperature responses</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('RX Buffer') }}</label>
+            <div class="controls">
+                <input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                <span class="help-inline">bytes</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Send \"Wait\"') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Spam the console with "wait"?</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('\"Wait\" Interval') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">How annoying do you want the "wait" spam to be?</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Smoothie Temperature Reporting') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Probably does the same as the repetier thing, I wouldn't enable both simultaneously</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Support M112') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: ">
+                <span class="help-inline">Like a virtual printer is ever gonna melt down</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Throttle') }}</label>
+            <div class="controls">
+                <input type="number" step="any" class="input-mini text-right" data-bind="value: ">
+                <span class="help-inline">dunno what this is</span>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <h4>{{ _('Other Stuff') }}</h4>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">{{ _('Minify Assets') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.virtualPrinter.enabled">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Bundle Assets') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.virtualPrinter.enabled">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Cache Control') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.virtualPrinter.enabled">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Preemptive Cache') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.virtualPrinter.enabled">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Clean Assets On Startup') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.virtualPrinter.enabled">
+            </div>
+        </div>
+    </form>
+</div>

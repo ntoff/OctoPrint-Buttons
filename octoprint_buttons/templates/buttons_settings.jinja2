@@ -1,0 +1,15 @@
+<h3>{{ _('Dev Settings') }}</h3>
+<p><strong>{{ _('Don\'t forget to restart OctoPrint after changing any of these.') }}</strong></p>
+<div>
+    <h4>{{ _('Virtual Printer') }}</h4>
+    <form class="form-horizontal">
+        
+        <div class="control-group">
+            <label class="control-label">{{ _('Enable Virtual Printer') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.virtualPrinterEnabled">
+            </div>
+        </div>
+    </form>
+</div>
+
