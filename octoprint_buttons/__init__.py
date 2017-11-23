@@ -17,25 +17,37 @@ class ButtonsPlugin(octoprint.plugin.SettingsPlugin,
         ]
 
     def get_settings_defaults(self):
-        return dict(virtualPrinterEnabled=False)
+        return dict(virtualPrinterEnabled=False,
+                    bundleAssets=True,
+                    minifyAssets=True,
+                    styleSheetType="css")
+
+    def sync_settings(self):
+        #sync settings in case config.yaml was manually edited
+        self.vprintEnabled = settings().getBoolean(["devel", "virtualPrinter", "enabled"])
+        self.bundleAssets = settings().getBoolean(["devel", "webassets", "bundle"])
+        self.minifyAssets = settings().getBoolean(["devel", "webassets", "minify"])
+        self.styleSheetType = settings().get(["devel", "stylesheet"])
+        self._settings.setBoolean(["virtualPrinterEnabled"], self.vprintEnabled)
+        self._settings.setBoolean(["bundleAssets"], self.bundleAssets)
+        self._settings.setBoolean(["minifyAssets"], self.minifyAssets)
+        self._settings.set(["styleSheetType"], self.styleSheetType)
 
     def on_after_startup(self):
         self._logger.info("Dev Tools Loaded")
-        self.vprintEnabled = settings().getBoolean(["devel", "virtualPrinter", "enabled"])
-        self._settings.setBoolean(["virtualPrinterEnabled"], self.vprintEnabled)
-    
-    #def on_settings_load(self):
-    #    self.vprintEnabled = settings().getBoolean(["devel", "virtualPrinter", "enabled"])
-    #    self._settings.setBoolean(["plugins", "buttons", "virtualPrinterEnabled"], self.vprintEnabled)
-    #    return data
-        
+        self.sync_settings()
+
     def on_settings_save(self, data):
-        for keys,value in data.items():
-            settings().setBoolean(["devel", "virtualPrinter", "enabled"], value)
-            self._settings.setBoolean(["virtualPrinterEnabled"], value)
-        #octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
-        #self.vprintEnabled = self._settings.getBoolean(["virtualPrinterEnabled"])
-        #settings().setBoolean(["devel", "virtualPrinter", "enabled"], self.vprintEnabled)
+        s = self._settings
+        if "styleSheetType" in data.keys():
+            settings().set(["devel", "stylesheet"], data["styleSheetType"])
+        if "virtualPrinterEnabled" in data.keys():
+            settings().setBoolean(["devel", "virtualPrinter", "enabled"], data["virtualPrinterEnabled"])
+        if "bundleAssets" in data.keys():
+            settings().setBoolean(["devel", "webassets", "bundle"], data["bundleAssets"])
+        if "minifyAssets" in data.keys():
+            settings().setBoolean(["devel", "webassets", "minify"], data["minifyAssets"])
+        self.sync_settings()
 
     def get_assets(self):
         return dict(

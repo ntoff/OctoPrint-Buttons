@@ -13,3 +13,29 @@
     </form>
 </div>
 
+<div>
+    <h4>{{ _('Dev Settings') }}</h4>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">{{ _('StyleSheet') }}</label>
+            <div class="controls">
+                <select data-bind="value: settings.plugins.buttons.styleSheetType">
+                    <option>css</option>
+                    <option>less</option>
+                </select>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Minify Web Assets') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.minifyAssets">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">{{ _('Bundle Web Assets') }}</label>
+            <div class="controls">
+                <input type="checkbox" data-bind="checked: settings.plugins.buttons.bundleAssets">
+            </div>
+        </div>
+    </form>
+</div>
