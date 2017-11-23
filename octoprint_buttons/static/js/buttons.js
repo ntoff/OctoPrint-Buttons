@@ -37,8 +37,10 @@ $(function() {
             var options = {
                 hide: false,
                 type: 'info',
+                    addclass:  'info_popup',
                 title: 'Info Test',
             }
+            
             self.showNotify(self,options);
         };
         self.showSuccess = function() {
@@ -118,7 +120,9 @@ $(function() {
             if (!options.text) {
                 options.text = "<a href=\"http://octopi.local\">This is a test url</a><p>This is just some text</p><p><ul><li>Item One</li><li>Item Two</li><li>Item Three</li></ul></p>"
             }
-            new PNotify(options);
+            if($('.info_popup').length <1){
+                new PNotify(options);
+            }
         };
 
         self.requestData = function() {
@@ -138,7 +142,7 @@ $(function() {
 
     OCTOPRINT_VIEWMODELS.push({
         construct: ButtonsViewModel,
-        //additionalNames: ["yourCustomViewModel"],
+        additionalNames: ["yourCustomViewModel"],
         dependencies: ["loginStateViewModel", "settingsViewModel"],
         //optional: ["someOtherViewModel"],
         elements: ["#tab_plugin_buttons", "#settings_plugin_buttons"]
