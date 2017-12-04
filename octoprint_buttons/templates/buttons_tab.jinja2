@@ -1,8 +1,5 @@
 <h3>Alert System Tests</h3>
 <div class="btn-group">
-        <p><button class="btn btn-default" data-bind="click: function() { closeAllNotices() }">{{ _('Close All') }}</button></p>
-</div>
-<div class="btn-group">
     <p><button class="btn btn-default" data-bind="click: function(alerType, alerTitle, alertName) { genericAlert('info', 'INFO', 'infoAlert', alerType, alerTitle, alertName) }">{{ _('Info') }}</button></p>
     <p><button class="btn btn-default" data-bind="click: function(alerType, alerTitle, alertName) { genericAlert('alert', 'ALERT', 'alertAlert', alerType, alerTitle, alertName) }">{{ _('Alert') }}</button></p>
     <p><button class="btn btn-default" data-bind="click: function(alerType, alerTitle, alertName) { genericAlert('error', 'ERROR', 'errorAlert', alerType, alerTitle, alertName) }">{{ _('Error') }}</button></p>

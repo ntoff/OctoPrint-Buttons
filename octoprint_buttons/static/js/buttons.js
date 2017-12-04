@@ -14,6 +14,15 @@ $(function() {
         self.settingsViewModel = parameters[1];
         self.loginState = parameters[0];
         
+        //whack a button up in the navbar to close all notifications, all those pesky notifications, we hates them. 
+        //stupid fat notificationses, they steals all our screen space they does. we hates them.
+        $('#navbar_plugin_announcements').before("\
+        <li id=\"navbar_announcements_close\">\
+        <a title=\"stupid fat notificationses. we hates them.\" href=\"javascript:void(0)\" data-bind=\"click: function() { closeAllNotices() }\">\
+        <i class=\"fa  fa-bell-slash-o\"></i>\
+        </a>\
+        </li>");
+
         self.closeAllNotices = function() {
             PNotify.removeAll();
         }
@@ -26,9 +35,20 @@ $(function() {
                 addclass:  "notify-"+alertName,
                 name: alertName
             }
+            
             //somehow detect if one has shown up, don't combine, but do notify that more of the same notification type as shown.
             if ($(".notify-"+alertName).length < 1) {
                 self.showNotify(self,options);
+            }
+            else if ($(".notify-"+alertName).length >= 1) {  //wait, is else if actually a thing? I typed that by mistake
+                $(".notify-"+alertName).remove(); //this doesn't work, need to use pnotify's own remove
+                //should do something like
+                /* 
+                 * for each PNotify.notices[0].state that's "open"
+                 * i = notice number, how do we get that? voodoomagic eh
+                 * PNotify.notices[i].remove()
+                 */
+                self.showNotify(self,options);  //this should go to another thing which gets a thing which goes "hey I removed your last thing, you've got multiple things of the same thing, deal with it"
             }
         };
 
@@ -95,6 +115,6 @@ $(function() {
         additionalNames: ["yourCustomViewModel"],
         dependencies: ["loginStateViewModel", "settingsViewModel"],
         //optional: ["someOtherViewModel"],
-        elements: ["#tab_plugin_buttons", "#settings_plugin_buttons"]
+        elements: ["#tab_plugin_buttons", "#settings_plugin_buttons", "#navbar_announcements_close"]
     });
 });
