@@ -14,79 +14,29 @@ $(function() {
         self.settingsViewModel = parameters[1];
         self.loginState = parameters[0];
         
-        //some day, turn this mess into a case statement or something that doesn't involve repeated junk
-        self.showError = function() {
-            var options = {
-                hide: false,
-                type: 'error',
-                title: 'Error Test',
-            }
-            self.showNotify(self,options);
-        };
-
-        self.showAlert = function() {
-            var options = {
-                hide: false,
-                type: 'alert',
-                title: 'Alert Test',
-            }
-            self.showNotify(self,options);
-        };
-        
-        self.showInfo = function() {
-            var options = {
-                hide: false,
-                type: 'info',
-                    addclass:  'info_popup',
-                title: 'Info Test',
-            }
-            
-            self.showNotify(self,options);
-        };
-        self.showSuccess = function() {
-            var options = {
-                hide: false,
-                type: 'success',
-                title: 'Success Test',
-            }
-            self.showNotify(self,options);
-        };
-        self.showAnnouncement = function() {
-            var options = {
-                title: "Announcement Test",
-                hide: false,
-                confirm: {
-                    confirm: true,
-                    buttons: [{
-                        text: gettext("Later"),
-                        click: function(notice) {
-                            notice.remove();
-                        }
-                    }, {
-                        text: gettext("Mark read"),
-                        click: function(notice) {
-                            notice.remove();
-                        }
-                    }, {
-                        text: gettext("Read..."),
-                        addClass: "btn-primary",
-                        click: function(notice) {
-                            notice.remove();
-                        }
-                    }]
-                },
-                buttons: {
-                    sticker: false,
-                    closer: false
-                }
-            };
-            self.showNotify(self,options);
+        self.closeAllNotices = function() {
+            PNotify.removeAll();
         }
 
-        self.showImportantAnnouncement = function() {
+        self.genericAlert = function(alerType, alerTitle, alertName) {
+            var options = {
+                hide: false,
+                type: alerType,
+                title: alerTitle + " Test",
+                addclass:  "notify-"+alertName,
+                name: alertName
+            }
+            //somehow detect if one has shown up, don't combine, but do notify that more of the same notification type as shown.
+            if ($(".notify-"+alertName).length < 1) {
+                self.showNotify(self,options);
+            }
+        };
+
+        self.showAnnouncement = function(alerType, alerTitle, alertName) {
             var options = {
                 title: "Announcement Test",
-                type: 'error',
+                addclass:  "notify-"+alertName,
+                type: alerType,
                 hide: false,
                 confirm: {
                     confirm: true,
@@ -113,16 +63,16 @@ $(function() {
                     closer: false
                 }
             };
-            self.showNotify(self,options);
+            if ($(".notify-"+alertName).length < 1) {
+                self.showNotify(self,options);
+            }
         }
 
         self.showNotify = function(self,options) {
             if (!options.text) {
                 options.text = "<a href=\"http://octopi.local\">This is a test url</a><p>This is just some text</p><p><ul><li>Item One</li><li>Item Two</li><li>Item Three</li></ul></p>"
             }
-            if($('.info_popup').length <1){
-                new PNotify(options);
-            }
+            new PNotify(options);
         };
 
         self.requestData = function() {
