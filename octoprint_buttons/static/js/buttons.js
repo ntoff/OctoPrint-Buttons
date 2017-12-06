@@ -10,10 +10,9 @@
 $(function() {
     function ButtonsViewModel(parameters) {
         var self = this;
-
+        var counter=0;
         self.settingsViewModel = parameters[1];
         self.loginState = parameters[0];
-        
         //whack a button up in the navbar to close all notifications, all those pesky notifications, we hates them. 
         //stupid fat notificationses, they steals all our screen space they does. we hates them.
         $('#navbar_plugin_announcements').before("\
@@ -25,28 +24,34 @@ $(function() {
 
         self.closeAllNotices = function() {
             PNotify.removeAll();
+            counter=0;
         }
 
         self.genericAlert = function(alerType, alerTitle, alertName) {
             var options = {
                 hide: false,
                 type: alerType,
-                title: alerTitle + " Test",
+                title: alerTitle + " Test " + counter,
                 addclass:  "notify-"+alertName,
                 name: alertName
             }
             
             //somehow detect if one has shown up, don't combine, but do notify that more of the same notification type as shown.
             if ($(".notify-"+alertName).length < 1) {
+                counter++;
                 self.showNotify(self,options);
             }
             else if ($(".notify-"+alertName).length >= 1) {  //wait, is else if actually a thing? I typed that by mistake
-                $(".notify-"+alertName).remove(); //this doesn't work, need to use pnotify's own remove
-                //should do something like
+                counter++;
+                PNotify.removeAll();  //don't do this...
+                //should do something like this
                 /* 
                  * for each PNotify.notices[0].state that's "open"
                  * i = notice number, how do we get that? voodoomagic eh
+                 * if notice[i].name = notify-alertName
                  * PNotify.notices[i].remove()
+                 * 
+                 * so we only remove the notifications of the same type
                  */
                 self.showNotify(self,options);  //this should go to another thing which gets a thing which goes "hey I removed your last thing, you've got multiple things of the same thing, deal with it"
             }
